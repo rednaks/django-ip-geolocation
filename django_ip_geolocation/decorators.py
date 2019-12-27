@@ -1,4 +1,5 @@
 from django_ip_geolocation.utils import get_remote_ip_from_request, get_geolocation_backend_cls
+import logging
 
 
 def with_ip_geolocation(view_func):
@@ -16,7 +17,7 @@ def with_ip_geolocation(view_func):
 
             return response
         except Exception as e:
-            pass
+            logging.error('Django Ip Geolocation Error', exc_info=True)
 
     return inner
 
