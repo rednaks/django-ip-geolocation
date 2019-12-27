@@ -16,7 +16,7 @@ def with_ip_geolocation(view_func):
 
             return response
         except Exception as e:
-            logging.error('Exception In geolocation', exc_info=True)
+            pass
 
     return inner
 
