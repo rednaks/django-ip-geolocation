@@ -1,5 +1,5 @@
 import requests
-from . import GeolocationBackend
+from django_ip_geolocation.backends import GeolocationBackend
 
 
 class IPGeolocationAPI(GeolocationBackend):
