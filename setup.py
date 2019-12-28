@@ -1,21 +1,20 @@
-from os import path
-import codecs
 from setuptools import setup, find_packages
 
-read = lambda filepath: codecs.open(filepath, 'r', 'utf-8').read()
-
+def readme():
+    with open("README.md") as f:
+        return f.read()
 
 setup(
     name='django-ip-geolocation',
-    version='0.0.5',
+    version='0.0.6',
     author='Skander Ben Mahmoud',
     author_email='skander.bmahmoud@gmail.com',
     packages=find_packages(exclude=("tests", "docs")),
     url='https://github.com/rednaks/django-ip-geolocation',
     license='MIT',
-    description="Django request/response hook (Middleware and Decorator) to geolocate visitors using their IP address",
-    long_description=read(path.join(path.dirname(__file__), 'README.md')),
-    long_description_content_type="text/markdown",
+    description="Django hook (Middleware and Decorator) to geolocate visitors using their IP address",
+    long_description_content_type='text/markdown',
+    long_description=readme(),
     install_requires=[
         'requests>=1.0.4',
     ],
