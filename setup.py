@@ -13,8 +13,9 @@ setup(
     packages=find_packages(exclude=("tests", "docs")),
     url='https://github.com/rednaks/django-ip-geolocation',
     license='MIT',
-    description="Django Framework (Middleware and Decorator) to geolocate visitors using their IP address",
+    description="Django request/response hook (Middleware and Decorator) to geolocate visitors using their IP address",
     long_description=read(path.join(path.dirname(__file__), 'README.md')),
+    long_description_content_type="text/markdown",
     install_requires=[
         'requests>=1.0.4',
     ],
