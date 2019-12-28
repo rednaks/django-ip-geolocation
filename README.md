@@ -34,3 +34,13 @@ def other_view(request):
   location = request.location
   ...
 ```
+
+## Settings
+You can configure backend for your hook in the `settings.py` as follow:
+```python
+
+GEOLOCATION_BACKEND = 'django_ip_geolocation.backends.IPGeolocationAPI'
+```
+
+### Available Backends:
+* `django_ip_geolocation.backends.IPGeolocationAPI` : (Default) Using https://ipgeolocationapi.com/
