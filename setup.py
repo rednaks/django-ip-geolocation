@@ -7,7 +7,7 @@ read = lambda filepath: codecs.open(filepath, 'r', 'utf-8').read()
 
 setup(
     name='django-ip-geolocation',
-    version='0.0.3',
+    version='0.0.4',
     author='Skander Ben Mahmoud',
     author_email='skander.bmahmoud@gmail.com',
     packages=find_packages(exclude=("tests", "docs")),
