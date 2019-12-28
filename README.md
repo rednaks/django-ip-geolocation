@@ -17,7 +17,7 @@ def api_view(request):
 
 First you need to add the middleware into your `settings.py`
 ```python
-MIDDLEWARES = [
+MIDDLEWARE = [
     ...
     'django_ip_geolocation.middleware.IpGeolocationMiddleware',
     ...
