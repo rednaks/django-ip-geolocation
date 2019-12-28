@@ -19,7 +19,7 @@ setup(
         'requests>=1.0.4',
     ],
     classifiers=[
-        'Development Status :: 1 - Dev',
+        'Development Status :: 4 - Beta',
         'Framework :: Django',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
