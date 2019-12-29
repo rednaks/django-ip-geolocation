@@ -1,4 +1,4 @@
-from django.conf import settings
+from django_ip_geolocation import settings
 from django.utils.module_loading import import_string
 import logging
 
@@ -12,14 +12,6 @@ def get_remote_ip_from_request(request):
 
 
 def get_geolocation_backend_cls():
-    geolocation_backend = 'django_ip_geolocation.backends.IPGeolocationAPI'
-    try:
-        geolocation_backend = settings.GEOLOCATION_BACKEND
-    except Exception:
-        logging.warning('Using default logger %s', geolocation_backend, exc_info=True)
-
-    
-    geolocation_backend_cls = import_string(geolocation_backend)
-
+    geolocation_backend_cls = import_string(settings.IP_GEOLOCATION_SETTINGS.get('BACKEND'))
     return geolocation_backend_cls
 
