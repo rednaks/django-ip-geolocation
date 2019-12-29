@@ -73,6 +73,9 @@ If you want to add a new backend, you need to inherit from `django_ip_geolocatio
 This method will make the external api call. It should also store the api response in `self._raw_data`. and call `self._parse()`.
 
 ### `_parse()`:
-This method will parse raw data stored in `self._raw_data` and assign values to the class attribute, such as `self._continent`, `self._county`, `self._geo`.
+This method will parse raw data stored in `self._raw_data` and assign values to the class attribute, such as 
+`self._continent`, `self._county`, `self._geo`.
+
 `self._country` is a dict, with `code` and `name` keys.
+
 `self._geo` is a dict with `latitude` and `longitude` keys.
