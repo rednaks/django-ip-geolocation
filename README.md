@@ -1,6 +1,11 @@
 # Django Ip Geolocation:
 Django request/response hooks to geolocate visitors by their ip address
 
+# Installing:
+```
+python -m pip install django-ip-geolocation
+``` 
+
 # Usage:
 ## Decorator:
 Use decorators to decorate views :
@@ -74,5 +79,7 @@ This method will make the external api call. It should also store the api respon
 
 ### `_parse()`:
 This method will parse raw data stored in `self._raw_data` and assign values to the class attribute, such as `self._continent`, `self._county`, `self._geo`.
+
 `self._country` is a dict, with `code` and `name` keys.
+
 `self._geo` is a dict with `latitude` and `longitude` keys.
