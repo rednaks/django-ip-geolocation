@@ -14,7 +14,7 @@ from django_ip_geolocation.decorators import with_ip_geolocation
 
 @with_ip_geolocation
 def api_view(request):
-   location = request.location
+   location = request.geolocation
    ...
 ```
 
@@ -32,11 +32,11 @@ MIDDLEWARE = [
 Then the location is available to all views in request and response:
 ```python
 def api_view(request):
-   location = request.location
+   location = request.geolocation
    ...
    
 def other_view(request):
-  location = request.location
+  location = request.geolocation
   ...
 ```
 
