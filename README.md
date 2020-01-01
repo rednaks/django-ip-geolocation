@@ -1,13 +1,13 @@
-# Django Ip Geolocation:
+# Django Ip Geolocation
 Django request/response hooks to geolocate visitors by their ip address
 
-# Installing:
+# Installing
 ```
 python -m pip install django-ip-geolocation
 ``` 
 
-# Usage:
-## Decorator:
+# Usage
+## Decorator
 Use decorators to decorate views :
 ```python
 from django_ip_geolocation.decorators import with_ip_geolocation
@@ -18,7 +18,7 @@ def api_view(request):
    ...
 ```
 
-## Middleware:
+## Middleware
 
 First you need to add the middleware into your `settings.py`
 ```python
@@ -67,17 +67,17 @@ Those are the default settings, that will be overwritten by those set in `settin
 | `ENABLE_REQUEST_HOOK`  | Enable or disable hook on request               | `True` (bool)                                                         |
 | `ENABLE_RESPONSE_HOOK` | Enable or disable hook on request               | `True` (bool)                                                         |
 
-### Available Backends:
+### Available Backends
 * `django_ip_geolocation.backends.IPGeolocationAPI` : (Default) Using https://ipgeolocationapi.com/
 * `django_ip_geolocation.backends.IPStack` : (Require `BACKEND_API_KEY`) Using https://ipstack.com/documentation
 
 
-## Implementing your own backend:
+## Implementing your own backend
 If you want to add a new backend, you need to inherit from `django_ip_geolocation.backends.base`. Then you need to implement `geolocate()` and `_parse()`.
-### `geolocate()`:
-This method will make the external api call. It should also store the api response in `self._raw_data`. and call `self._parse()`.
+### `geolocate()`
+This method will make the external api call. It should also store the api response in `self._raw_data`.
 
-### `_parse()`:
+### `_parse()`
 This method will parse raw data stored in `self._raw_data` and assign values to the class attribute, such as `self._continent`, `self._county`, `self._geo`.
 
 `self._country` is a dict, with `code` and `name` keys.
