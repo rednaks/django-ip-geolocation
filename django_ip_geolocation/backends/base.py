@@ -16,6 +16,8 @@ class GeolocationBackend(object):
         raise NotImplementedException()
 
     def data(self):
+        self._parse()
+
         return {
             ip: self._ip,
             continent: self._continent,

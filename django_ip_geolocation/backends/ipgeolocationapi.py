@@ -8,7 +8,6 @@ class IPGeolocationAPI(GeolocationBackend):
         res = requests.get('https://api.ipgeolocationapi.com/geolocate/{}'.format(self._ip))
         if res.ok:
             self._raw_data = res.json()
-            self._parse()
 
         
     def _parse(self):
