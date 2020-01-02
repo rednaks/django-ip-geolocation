@@ -1,5 +1,5 @@
 # Django Ip Geolocation
-Django request/response hooks to geolocate visitors by their ip address
+Django request/response hooks to geolocate visitors by their ip address.
 
 # Installing
 ```
@@ -8,7 +8,7 @@ python -m pip install django-ip-geolocation
 
 # Usage
 ## Decorator
-Use decorators to decorate views :
+Use decorators to decorate views:
 ```python
 from django_ip_geolocation.decorators import with_ip_geolocation
 
@@ -20,7 +20,7 @@ def api_view(request):
 
 ## Middleware
 
-First you need to add the middleware into your `settings.py`
+First you need to add the middleware into your `settings.py`.
 ```python
 MIDDLEWARE = [
     ...
@@ -73,13 +73,13 @@ Those are the default settings, that will be overwritten by those set in `settin
 
 
 ## Implementing your own backend
-If you want to add a new backend, you need to inherit from `django_ip_geolocation.backends.base`. Then you need to implement `geolocate()` and `_parse()`.
+If you want to add a new backend, you need to inherit from `django_ip_geolocation.backends.base`, then you need to implement `geolocate()` and `_parse()`.
 ### `geolocate()`
-This method will make the external api call. It should also store the api response in `self._raw_data`.
+ Makes API calls and stores the API response in `self._raw_data`.
 
 ### `_parse()`
-This method will parse raw data stored in `self._raw_data` and assign values to the class attribute, such as `self._continent`, `self._county`, `self._geo`.
+Parse raw data stored in `self._raw_data` and assigns values to the class attribute, such as `self._continent`, `self._county`, `self._geo`.
 
-`self._country` is a dict, with `code` and `name` keys.
+`self._country` is a dict with `code` and `name` keys.
 
 `self._geo` is a dict with `latitude` and `longitude` keys.
