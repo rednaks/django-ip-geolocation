@@ -31,7 +31,7 @@ class IpGeolocationMiddleware(MiddlewareMixin):
         except Exception:
             logging.error("Couldn't geolocate ip", exc_info=True)
 
-       return response
+        return response
 
     def _get_geolocation(self, request):
         ip = get_remote_ip_from_request(request)
