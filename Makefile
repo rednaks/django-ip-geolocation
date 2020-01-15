@@ -2,8 +2,6 @@
 DIST_DIR=dist
 PYTHON=python3.7
 
-dependencies:
-
 
 build: setup.py
 	echo "Building ..."
