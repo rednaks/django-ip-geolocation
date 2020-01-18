@@ -1,10 +1,10 @@
-from django_ip_geolocation.utils import get_remote_ip_from_request, \
-    get_geolocation_backend_cls, set_cookie
-from django_ip_geolocation import settings
 import logging
+from django_ip_geolocation.utils import get_geolocation, set_cookie
+from django_ip_geolocation import settings
 
 
 def with_ip_geolocation(view_func):
+    "decorator hook"
 
     def inner(request):
         try:
@@ -12,10 +12,7 @@ def with_ip_geolocation(view_func):
                     not settings.IP_GEOLOCATION_SETTINGS.get('ENABLE_RESPONSE_HOOK'):
                 return view_func(request)
 
-            ip = get_remote_ip_from_request(request)
-            backend_cls = get_geolocation_backend_cls()
-            backend_instance = backend_cls(ip)
-            geolocation = backend_instance.geolocate()
+            geolocation = get_geolocation(request)
 
             if settings.IP_GEOLOCATION_SETTINGS.get('ENABLE_REQUEST_HOOK'):
                 request.geolocation = geolocation
@@ -29,9 +26,8 @@ def with_ip_geolocation(view_func):
                 set_cookie(response, geolocation)
 
             return response
-        except Exception as e:
+        except Exception:
             logging.error('Django Ip Geolocation Error', exc_info=True)
             return view_func(request)
 
     return inner
-
