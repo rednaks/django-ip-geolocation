@@ -15,3 +15,6 @@ def get_geolocation_backend_cls():
     geolocation_backend_cls = import_string(settings.IP_GEOLOCATION_SETTINGS.get('BACKEND'))
     return geolocation_backend_cls
 
+
+def set_cookie(response, geolocation_data):
+  response.set_cookie('geolocation', geolocation_data)
