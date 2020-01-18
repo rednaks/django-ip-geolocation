@@ -14,7 +14,8 @@ def with_ip_geolocation(view_func):
             ip = get_remote_ip_from_request(request)
             backend_cls = get_geolocation_backend_cls()
             backend_instance = backend_cls(ip)
-            geolocation = backend_instance.geolocate()
+            backend_instance.geolocate()
+            geolocation = backend_instance.data()
 
             if settings.IP_GEOLOCATION_SETTINGS.get('ENABLE_REQUEST_HOOK'):
                 request.geolocation = geolocation
