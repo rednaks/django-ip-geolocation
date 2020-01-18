@@ -42,7 +42,8 @@ def get_geolocation(request):
     backend_cls = _get_geolocation_backend_cls()
     backend_instance = backend_cls(ip_addr)
 
-    return backend_instance.geolocate().data()
+    backend_instance.geolocate()
+    return backend_instance.data()
 
 
 def set_cookie(response, geolocation_data):
