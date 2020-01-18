@@ -1,4 +1,5 @@
-from django_ip_geolocation.utils import get_remote_ip_from_request, get_geolocation_backend_cls
+from django_ip_geolocation.utils import get_remote_ip_from_request, \
+    get_geolocation_backend_cls, set_cookie
 from django_ip_geolocation import settings
 import logging
 
@@ -23,6 +24,9 @@ def with_ip_geolocation(view_func):
 
             if settings.IP_GEOLOCATION_SETTINGS.get('ENABLE_RESPONSE_HOOK'):
                 response[settings.IP_GEOLOCATION_SETTINGS.get('RESPONSE_HEADER')] = geolocation
+
+            if settings.IP_GEOLOCATION_SETTINGS.get('ENABLE_COOKIE', False):
+                set_cookie(response, geolocation)
 
             return response
         except Exception as e:
