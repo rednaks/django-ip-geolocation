@@ -51,6 +51,7 @@ IP_GEOLOCATION_SETTINGS = {
     'RESPONSE_HEADER': 'X-IP-Geolocation',
     'ENABLE_REQUEST_HOOK': True,
     'ENABLE_RESPONSE_HOOK': True,
+    'ENABLE_COOKIE': False,
 }
 
 ```
@@ -66,6 +67,7 @@ Those are the default settings, that will be overwritten by those set in `settin
 | `RESPONSE_HEADER`      | Custom response header to store the geolocation | `X-IP-Geolocation` (string)                                           |
 | `ENABLE_REQUEST_HOOK`  | Enable or disable hook on request               | `True` (bool)                                                         |
 | `ENABLE_RESPONSE_HOOK` | Enable or disable hook on request               | `True` (bool)                                                         |
+| `ENABLE_COOKIE`        | Enable or disable geolocation data in cookie    | `False` (bool)                                                        |
 
 ### Available Backends
 * `django_ip_geolocation.backends.IPGeolocationAPI` : (Default) Using https://ipgeolocationapi.com/
