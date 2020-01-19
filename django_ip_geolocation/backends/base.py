@@ -19,9 +19,9 @@ class GeolocationBackend(object):
         self._parse()
 
         return {
-            ip: self._ip,
-            continent: self._continent,
-            county: self._country,
-            geo: self._geo_data,
-            raw_data: self._raw_data
+            'ip': self._ip,
+            'continent': self._continent,
+            'county': self._country,
+            'geo': self._geo_data,
+            'raw_data': self._raw_data
         }
