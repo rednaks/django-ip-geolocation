@@ -10,15 +10,9 @@ install:
   - pip install flake8 flake8-docstrings bandit twine
 # command to run tests
 
-style:
+script:
   - flake8 .
-
-security:
   - bandit -r .
-
-build:
   - python setup.py sdis
-
-check:
   - twine check dist/*
 
