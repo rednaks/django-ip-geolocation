@@ -9,7 +9,6 @@ class IPGeolocationAPI(GeolocationBackend):
         if res.ok:
             self._raw_data = res.json()
 
-        
     def _parse(self):
         """raw_data example:
         {
@@ -29,10 +28,9 @@ class IPGeolocationAPI(GeolocationBackend):
         }
         """
         self._continent = self._raw_data.get('continent')
-        self._county = {
+        self._country = {
             'code': self._raw_data.get('alpha2'),
             'name': self._raw_data.get('name'),
         }
 
         self._geo_data = self._raw_data.get('geo')
-
