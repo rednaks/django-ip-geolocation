@@ -5,11 +5,11 @@ from django_ip_geolocation.backends import GeolocationBackend
 class IPGeolocationAPI(GeolocationBackend):
 
     def geolocate(self):
-        res = requests.get('https://api.ipgeolocationapi.com/geolocate/{}'.format(self._ip))
+        url = 'https://api.ipgeolocationapi.com/geolocate/{}'.format(self._ip)
+        res = requests.get(url)
         if res.ok:
             self._raw_data = res.json()
 
-        
     def _parse(self):
         """raw_data example:
         {
@@ -29,10 +29,9 @@ class IPGeolocationAPI(GeolocationBackend):
         }
         """
         self._continent = self._raw_data.get('continent')
-        self._county = {
+        self._country = {
             'code': self._raw_data.get('alpha2'),
             'name': self._raw_data.get('name'),
         }
 
         self._geo_data = self._raw_data.get('geo')
-
