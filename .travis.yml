@@ -1,0 +1,18 @@
+language: python
+python:
+  - "2.7"
+  - "3.5"
+  - "3.6"      # current default Python on Travis CI
+  - "3.7"
+  - "3.8"
+# command to install dependencies
+install:
+  - pip install flake8 flake8-docstrings bandit twine
+# command to run tests
+
+script:
+  - flake8 --exit-zero .
+  - bandit -r .
+  - python setup.py sdist
+  - twine check dist/*
+
