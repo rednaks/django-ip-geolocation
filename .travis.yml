@@ -12,12 +12,12 @@ install:
 
 jobs:
   include:
-  - stage: lint
-    script: flake8 .
-  - stage: sec-audit
-    script: bandit -r .
-  - stage: build
-    script: python setup.py sdist
-  - stage: check-build
-    script: twine check dist/*
+    - stage: lint
+      script: flake8 .
+    - stage: sec-audit
+      script: bandit -r .
+    - stage: build
+      script: python setup.py sdist
+    - stage: check-build
+      script: twine check dist/*
 
