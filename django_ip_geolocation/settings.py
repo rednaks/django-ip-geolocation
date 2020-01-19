@@ -1,4 +1,4 @@
-from django.conf import settings
+from django.conf import settings # pylint: disable=import-error
 
 IP_GEOLOCATION_SETTINGS = {
     'BACKEND': 'django_ip_geolocation.backends.IPGeolocationAPI',

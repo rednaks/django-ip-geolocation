@@ -1,12 +1,14 @@
 from setuptools import setup, find_packages
 
+
 def readme():
     with open("README.md") as f:
         return f.read()
 
+
 setup(
     name='django-ip-geolocation',
-    version='1.0.2',
+    version='1.0.3',
     author='Skander Ben Mahmoud',
     author_email='skander.bmahmoud@gmail.com',
     packages=find_packages(exclude=("tests", "docs")),
