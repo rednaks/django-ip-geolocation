@@ -9,14 +9,14 @@ class IPStack(GeolocationBackend):
         api_key = settings.IP_GEOLOCATION_SETTINGS.get('BACKEND_API_KEY')
 
         if not api_key:
-            msg = "BACKEND_API_KEY is required. Please provide an API_KEY in IP_GEOLOCATION_SETTINGS" 
+            msg = "BACKEND_API_KEY is required. Please provide an API_KEY in IP_GEOLOCATION_SETTINGS"
             raise Exception(msg)
 
         payload = {'access_key': api_key}
-        res = requests.get('http://api.ipstack.com/{}'.format(self._ip), data=payload)
+        url = 'http://api.ipstack.com/{}'.format(self._ip)
+        res = requests.get(url, data=payload)
         if res.ok:
             self._raw_data = res.json()
-
 
     def _parse(self):
         self._continent = self._raw_data.get('continent_name')

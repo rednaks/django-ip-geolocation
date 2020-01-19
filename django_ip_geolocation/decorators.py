@@ -26,9 +26,8 @@ def with_ip_geolocation(view_func):
                 response[settings.IP_GEOLOCATION_SETTINGS.get('RESPONSE_HEADER')] = geolocation
 
             return response
-        except Exception as e:
+        except Exception:
             logging.error('Django Ip Geolocation Error', exc_info=True)
             return view_func(request)
 
     return inner
-
