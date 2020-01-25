@@ -11,7 +11,7 @@ install:
 # command to run tests
 
 script:
-  - flake8 --exit-zero --count --statistics .
+  - flake8 --count --statistics .
   - bandit -r .
   - python setup.py sdist
   - twine check dist/*
