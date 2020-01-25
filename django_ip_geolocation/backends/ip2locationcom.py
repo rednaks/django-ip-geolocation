@@ -1,16 +1,20 @@
+"""IP2location.com service integration."""
+
 import requests
 from django_ip_geolocation.backends import GeolocationBackend
-from django_ip_geolocation import settings
+from django_ip_geolocation.settings import IP_GEOLOCATION_SETTINGS as _settings
 
 
 class IP2LocationCom(GeolocationBackend):
+    """IP2location.com backend implementation."""
 
     def geolocate(self):
-        api_key = settings.IP_GEOLOCATION_SETTINGS.get('BACKEND_API_KEY')
-        extra_params = settings.IP_GEOLOCATION_SETTINGS.get('BACKEND_EXTRA_PARAMS', {})
+        """Call ip2location.com api."""
+        api_key = _settings.get('BACKEND_API_KEY')
+        extra_params = _settings.get('BACKEND_EXTRA_PARAMS', {})
 
         if not api_key:
-            msg = "BACKEND_API_KEY is required. Please provide an API_KEY in IP_GEOLOCATION_SETTINGS"
+            msg = "BACKEND_API_KEY is required. Please provide an API_KEY in IP_GEOLOCATION_SETTINGS"  # noqa: E501
             raise Exception(msg)
 
         payload = {
@@ -25,6 +29,7 @@ class IP2LocationCom(GeolocationBackend):
             self._raw_data = res.json()
 
     def _parse(self):
+        """Parse raw data."""
         self._continent = self._raw_data.get('continent_name')
         self._country = {
             'code': self._raw_data.get('country_code'),
