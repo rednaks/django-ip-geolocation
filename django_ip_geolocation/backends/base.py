@@ -5,7 +5,7 @@ class GeolocationBackend(object):
     """Base interface for backends."""
 
     def __init__(self, ip):
-        """Constructor.
+        """Construct class.
 
         :param ip: Ip address
         :type: str
