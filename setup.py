@@ -1,20 +1,23 @@
+"""Package setup script."""
+
 from setuptools import setup, find_packages
 
 
 def readme():
+    """Load readme."""
     with open("README.md") as f:
         return f.read()
 
 
 setup(
     name='django-ip-geolocation',
-    version='1.0.3',
+    version='1.2.0',
     author='Skander Ben Mahmoud',
     author_email='skander.bmahmoud@gmail.com',
     packages=find_packages(exclude=("tests", "docs")),
     url='https://github.com/rednaks/django-ip-geolocation',
     license='MIT',
-    description="Django request/response hook (Middleware and Decorator) to geolocate visitors using their IP address",
+    description="Django request/response hook (Middleware and Decorator) to geolocate visitors using their IP address",  # noqa: E501
     long_description_content_type='text/markdown',
     long_description=readme(),
     install_requires=[

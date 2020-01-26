@@ -1,17 +1,22 @@
+"""IPGeolocationAPI.com service integration."""
 import requests
 from django_ip_geolocation.backends import GeolocationBackend
 
 
 class IPGeolocationAPI(GeolocationBackend):
+    """IPGeolocationAPI.com backend implementation."""
 
     def geolocate(self):
+        """Call ipgeolocationapi api."""
         url = 'https://api.ipgeolocationapi.com/geolocate/{}'.format(self._ip)
         res = requests.get(url)
         if res.ok:
             self._raw_data = res.json()
 
     def _parse(self):
-        """raw_data example:
+        """Parse raw data.
+
+        raw_data example:
         {
             "continent": "Europe",
             "alpha2": "DE",

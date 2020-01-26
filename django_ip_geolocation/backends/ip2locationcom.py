@@ -1,25 +1,34 @@
-"""IPStack.com service integration."""
+"""IP2location.com service integration."""
+
 import requests
 from django_ip_geolocation.backends import GeolocationBackend
-from django_ip_geolocation import settings
+from django_ip_geolocation.settings import IP_GEOLOCATION_SETTINGS as _settings
 
 
-class IPStack(GeolocationBackend):
-    """IPStack.com backend implementation."""
+class IP2LocationCom(GeolocationBackend):
+    """IP2location.com backend implementation."""
 
     def geolocate(self):
-        """Call ipstack api."""
-        api_key = settings.IP_GEOLOCATION_SETTINGS.get('BACKEND_API_KEY')
+        """Call ip2location.com api."""
+        api_key = _settings.get('BACKEND_API_KEY')
+        extra_params = _settings.get('BACKEND_EXTRA_PARAMS', {})
 
         if not api_key:
             msg = "BACKEND_API_KEY is required. Please provide an API_KEY in IP_GEOLOCATION_SETTINGS"  # noqa: E501
             raise Exception(msg)
 
-        payload = {'access_key': api_key}
-        url = 'http://api.ipstack.com/{}'.format(self._ip)
+        payload = {
+            'key': api_key,
+            'ip': self._ip,
+            'package': extra_params.get('package', 'WS24')
+        }
+
+        url = 'https://api.ip2location.com/v2/'
         res = requests.get(url, params=payload)
         if res.ok:
             self._raw_data = res.json()
+        else:
+            raise Exception(res.text)
 
     def _parse(self):
         """Parse raw data."""

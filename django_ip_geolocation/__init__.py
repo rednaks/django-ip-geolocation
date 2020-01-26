@@ -1,0 +1,1 @@
+"""Django ip gelocation module."""
