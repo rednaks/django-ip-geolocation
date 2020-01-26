@@ -1,9 +1,10 @@
+"""Helper functions."""
 from django_ip_geolocation import settings
-from django.utils.module_loading import import_string # pylint: disable=import-error
+from django.utils.module_loading import import_string  # noqa: E501 # pylint: disable=import-error
 
 
 def _get_remote_ip_from_request(request):
-    """Retrieves remote ip addr from request
+    """Retrieve remote ip addr from request.
 
     :param request: Django request
     :type: django.http.HttpRequest
@@ -19,25 +20,24 @@ def _get_remote_ip_from_request(request):
 
 
 def _get_geolocation_backend_cls():
-    """Retuns geolocation backend class
+    """Retun geolocation backend class.
 
     :return: Geolocation backend class
     :rtype: class
     """
-
-    geolocation_backend_cls = import_string(settings.IP_GEOLOCATION_SETTINGS.get('BACKEND'))
+    backend_class_name = settings.IP_GEOLOCATION_SETTINGS.get('BACKEND')
+    geolocation_backend_cls = import_string(backend_class_name)
     return geolocation_backend_cls
 
 
 def get_geolocation(request):
-    """get_geolocation
+    """Fetch geolocation data.
 
     :param request: Django hooked request
     :type: django.http.HttpRequest
     :return: Geolocation data
     :rtype: dict
     """
-
     ip_addr = _get_remote_ip_from_request(request)
     backend_cls = _get_geolocation_backend_cls()
     backend_instance = backend_cls(ip_addr)
@@ -47,7 +47,7 @@ def get_geolocation(request):
 
 
 def set_cookie(response, geolocation_data):
-    """Adds geolocation data in response cookie
+    """Add geolocation data in response cookie.
 
     :param response:
     :type: django.http.HttpResponse

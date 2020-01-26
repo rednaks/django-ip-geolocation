@@ -1,9 +1,15 @@
-class NotImplementedException(Exception):
-    pass
+"""Base interface for backends."""
 
 
 class GeolocationBackend(object):
+    """Base interface for backends."""
+
     def __init__(self, ip):
+        """Construct class.
+
+        :param ip: Ip address
+        :type: str
+        """
         self._ip = ip
         self._continent = None
         self._country = None
@@ -11,12 +17,19 @@ class GeolocationBackend(object):
         self._raw_data = None
 
     def geolocate(self):
-        raise NotImplementedException()
+        """Call geoloaction api. Should be overriden."""
+        raise NotImplementedError()
 
     def _parse(self):
-        raise NotImplementedException()
+        """Parse raw data and store them in object attributes."""
+        raise NotImplementedError()
 
     def data(self):
+        """Return the parsed data.
+
+        :return: Parsed data.
+        :rtype: dict
+        """
         self._parse()
 
         return {

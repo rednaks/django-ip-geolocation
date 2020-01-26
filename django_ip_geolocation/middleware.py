@@ -1,22 +1,22 @@
+"""Django middleware."""
 import logging
 
-from django.utils.deprecation import MiddlewareMixin # pylint: disable=import-error
+from django.utils.deprecation import MiddlewareMixin  # noqa: E501 pylint: disable=import-error
 from django_ip_geolocation.utils import get_geolocation, set_cookie
-from django_ip_geolocation import settings
+from django_ip_geolocation.settings import IP_GEOLOCATION_SETTINGS as _settings  # noqa: E501
 
 
 class IpGeolocationMiddleware(MiddlewareMixin):
-    "Mixin Middleware Hook"
+    """Mixin Middleware Hook."""
 
-    def __init__(self, get_response=None):
+    def __init__(self, get_response=None):  # noqa: D107
         self._geolocation_data = None
         super(IpGeolocationMiddleware).__init__(get_response)
 
     def process_request(self, request):
-        "A hook on the request"
-
+        """Process the request."""
         try:
-            if not settings.IP_GEOLOCATION_SETTINGS.get('ENABLE_REQUEST_HOOK'):
+            if not _settings.get('ENABLE_REQUEST_HOOK'):
                 return
 
             self._get_geolocation(request)
@@ -25,22 +25,21 @@ class IpGeolocationMiddleware(MiddlewareMixin):
             logging.error("Couldn't geolocate ip", exc_info=True)
 
     def process_response(self, request, response):
-        "A hook on the response"
-
+        """Process the response."""
         try:
-            if not settings.IP_GEOLOCATION_SETTINGS.get('ENABLE_RESPONSE_HOOK') and \
-                    not settings.IP_GEOLOCATION_SETTINGS.get('ENABLE_COOKIE'):
+            if not _settings.get('ENABLE_RESPONSE_HOOK') and \
+                    not _settings.get('ENABLE_COOKIE'):
                 return response
 
             if self._geolocation_data is None:
                 self._get_geolocation(request)
 
-            if settings.IP_GEOLOCATION_SETTINGS.get('ENABLE_REQUEST_HOOK'):
+            if _settings.get('ENABLE_REQUEST_HOOK'):
                 # Response hook is enabled
-                header = settings.IP_GEOLOCATION_SETTINGS.get('RESPONSE_HEADER')
+                header = _settings.get('RESPONSE_HEADER')
                 response[header] = self._geolocation_data
 
-            if settings.IP_GEOLOCATION_SETTINGS.get('ENABLE_COOKIE'):
+            if _settings.get('ENABLE_COOKIE'):
                 set_cookie(response, self._geolocation_data)
 
         except Exception:
@@ -49,5 +48,5 @@ class IpGeolocationMiddleware(MiddlewareMixin):
         return response
 
     def _get_geolocation(self, request):
-        "Helper internal method to fetch geolcation using backend defined in settings"
+        """Fetch geolcation using backend defined in settings."""
         self._geolocation_data = get_geolocation(request)

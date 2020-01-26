@@ -47,6 +47,7 @@ You can configure settings for your hook in the `settings.py` as follow:
 IP_GEOLOCATION_SETTINGS = {
     'BACKEND': 'django_ip_geolocation.backends.IPGeolocationAPI',
     'BACKEND_API_KEY': '',
+    'BACKEND_EXTRA_PARAMS': {},
     'BACKEND_USERNAME': '',
     'RESPONSE_HEADER': 'X-IP-Geolocation',
     'ENABLE_REQUEST_HOOK': True,
@@ -63,6 +64,7 @@ Those are the default settings, that will be overwritten by those set in `settin
 |------------------------|-------------------------------------------------|-----------------------------------------------------------------------|
 | `BACKEND`              | Backend class used to detect the geolocation    | `django_ip_geolocation.backends.IPGeolocationAPI` (string class path) |
 | `BACKEND_API_KEY`      | Api key or token for the backend                | Empty (string)                                                        |
+| `BACKEND_EXTRA_PARAMS` | Extra parameters specific to the backend        | `{}` (dict)                                                           |
 | `BACKEND_USERNAME`     | username for the backend                        | Empty (string)                                                        |
 | `RESPONSE_HEADER`      | Custom response header to store the geolocation | `X-IP-Geolocation` (string)                                           |
 | `ENABLE_REQUEST_HOOK`  | Enable or disable hook on request               | `True` (bool)                                                         |
@@ -72,6 +74,7 @@ Those are the default settings, that will be overwritten by those set in `settin
 ### Available Backends
 * `django_ip_geolocation.backends.IPGeolocationAPI` : (Default) Using https://ipgeolocationapi.com/
 * `django_ip_geolocation.backends.IPStack` : (Require `BACKEND_API_KEY`) Using https://ipstack.com/documentation
+* `django_ip_geolocation.backends.IP2LocationCom` : (Require `BACKEND_API_KEY`, Accepts `BACKEND_EXTRA_PARAMS`) Using https://www.ip2location.com/web-service/ip2location
 
 
 ## Implementing your own backend
