@@ -24,9 +24,11 @@ class IP2LocationCom(GeolocationBackend):
         }
 
         url = 'https://api.ip2location.com/v2/'
-        res = requests.get(url, data=payload)
+        res = requests.get(url, params=payload)
         if res.ok:
             self._raw_data = res.json()
+        else:
+            raise Exception(res.text)
 
     def _parse(self):
         """Parse raw data."""

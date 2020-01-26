@@ -17,7 +17,7 @@ class IPStack(GeolocationBackend):
 
         payload = {'access_key': api_key}
         url = 'http://api.ipstack.com/{}'.format(self._ip)
-        res = requests.get(url, data=payload)
+        res = requests.get(url, params=payload)
         if res.ok:
             self._raw_data = res.json()
 
