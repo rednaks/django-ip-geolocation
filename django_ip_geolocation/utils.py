@@ -1,6 +1,6 @@
 """Helper functions."""
-from django_ip_geolocation import settings
 from django.utils.module_loading import import_string  # noqa: E501 # pylint: disable=import-error
+from django_ip_geolocation import settings
 
 
 def _get_remote_ip_from_request(request):
@@ -38,7 +38,10 @@ def get_geolocation(request):
     :return: Geolocation data
     :rtype: dict
     """
-    ip_addr = _get_remote_ip_from_request(request)
+    ip_addr = settings.IP_GEOLOCATION_SETTINGS.get('FORCE_IP_ADDR', None)
+    if not ip_addr:
+        ip_addr = _get_remote_ip_from_request(request)
+
     backend_cls = _get_geolocation_backend_cls()
     backend_instance = backend_cls(ip_addr)
 
