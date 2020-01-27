@@ -71,7 +71,7 @@ Those are the default settings, that will be overwritten by those set in `settin
 | `ENABLE_REQUEST_HOOK`  | Enable or disable hook on request               | `True` (bool)                                                         |
 | `ENABLE_RESPONSE_HOOK` | Enable or disable hook on request               | `True` (bool)                                                         |
 | `ENABLE_COOKIE`        | Enable or disable geolocation data in cookie    | `False` (bool)                                                        |
-| `FORCE_IP_ADDR`        | Force ip address, radher than using visitor ip  | `None` (string)                                                       |
+| `FORCE_IP_ADDR`        | Force ip address, rather than using visitor ip  | `None` (string)                                                       |
 
 ### Available Backends
 * `django_ip_geolocation.backends.IPGeolocationAPI` : (Default) Using https://ipgeolocationapi.com/
