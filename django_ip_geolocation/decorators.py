@@ -17,7 +17,9 @@ def with_ip_geolocation(view_func):
         try:
             enable_request = _settings.get('ENABLE_REQUEST_HOOK')
             enable_response = _settings.get('ENABLE_RESPONSE_HOOK')
-            if not enable_request and not enable_response:
+            enable_cookie = _settings.get('ENABLE_COOKIE', False)
+
+            if not enable_request and not (enable_response or enable_cookie):
                 return view_func(request)
 
             geolocation = get_geolocation(request)
@@ -31,7 +33,7 @@ def with_ip_geolocation(view_func):
                 header = _settings.get('RESPONSE_HEADER')
                 response[header] = geolocation
 
-            if _settings.get('ENABLE_COOKIE', False):
+            if enable_cookie:
                 set_cookie(response, geolocation)
 
             return response
