@@ -84,7 +84,6 @@ def clean_geolocation_data(geolocation_data, attr_to_remove=None):
 
     for attr in attr_to_remove:
         try:
-            logging.info('deleting: %s: %s', attr, geolocation_copy[attr])
             del geolocation_copy[attr]
         except KeyError:
             logging.info('Key not found, continuing ...')
