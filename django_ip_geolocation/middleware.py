@@ -2,7 +2,8 @@
 import logging
 
 from django.utils.deprecation import MiddlewareMixin  # noqa: E501 pylint: disable=import-error
-from django_ip_geolocation.utils import get_geolocation, set_cookie
+from django_ip_geolocation.utils import get_geolocation, set_cookie, \
+    clean_geolocation_data
 from django_ip_geolocation.settings import IP_GEOLOCATION_SETTINGS as _settings  # noqa: E501
 
 
@@ -20,7 +21,7 @@ class IpGeolocationMiddleware(MiddlewareMixin):
                 return
 
             self._get_geolocation(request)
-            request.geolocation = self._get_geolocation_data
+            request.geolocation = self._geolocation_data
         except Exception:
             logging.error("Couldn't geolocate ip", exc_info=True)
 
@@ -40,7 +41,9 @@ class IpGeolocationMiddleware(MiddlewareMixin):
                 response[header] = self._geolocation_data
 
             if _settings.get('ENABLE_COOKIE'):
-                set_cookie(response, self._geolocation_data)
+                cleaned_geolocation_data = clean_geolocation_data(
+                    self._geolocation_data, ['raw_data'])
+                set_cookie(response, cleaned_geolocation_data)
 
         except Exception:
             logging.error("Couldn't geolocate ip", exc_info=True)
