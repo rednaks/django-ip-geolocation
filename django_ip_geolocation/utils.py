@@ -1,4 +1,7 @@
 """Helper functions."""
+import base64
+import json
+import logging
 from django.utils.module_loading import import_string  # noqa: E501 # pylint: disable=import-error
 from django_ip_geolocation import settings
 
@@ -58,4 +61,31 @@ def set_cookie(response, geolocation_data):
     :type: dict
     :rtype: None
     """
-    response.set_cookie('geolocation', geolocation_data)
+    encoded_data = base64.b64encode(json.dumps(geolocation_data))
+    response.set_cookie('geolocation', encoded_data)
+
+
+def clean_geolocation_data(geolocation_data, attr_to_remove=None):
+    """Remove attributes from geolocation data.
+
+    If no attributes are provided, return a copy of the same data.
+
+    :param geolocation_data: Full geolocation data
+    :type: dict
+    :param attr_to_remove: List of attributes to remove
+    :type: list
+    :return: Geolocation data (cleaned or copy)
+    :rtype: dict
+    """
+    geolocation_copy = geolocation_data.copy()
+
+    if attr_to_remove is None:
+        return geolocation_copy
+
+    for attr in attr_to_remove:
+        try:
+            del geolocation_copy[attr]
+        except KeyError:
+            logging.info('Key not found, continuing ...')
+
+    return geolocation_copy
