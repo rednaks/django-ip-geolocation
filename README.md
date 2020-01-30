@@ -40,6 +40,10 @@ def other_view(request):
   ...
 ```
 
+## Cookie:
+Geolocation data stored in the Response cookie lacks the `raw_data` and is base64 encoded.
+
+
 ## Settings
 You can configure settings for your hook in the `settings.py` as follow:
 ```python
