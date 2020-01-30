@@ -1,7 +1,8 @@
 """Django view decorator."""
 
 import logging
-from django_ip_geolocation.utils import get_geolocation, set_cookie
+from django_ip_geolocation.utils import get_geolocation, set_cookie, \
+    clean_geolocation_data
 from django_ip_geolocation.settings import IP_GEOLOCATION_SETTINGS as _settings
 
 
@@ -34,7 +35,9 @@ def with_ip_geolocation(view_func):
                 response[header] = geolocation
 
             if enable_cookie:
-                set_cookie(response, geolocation)
+                cleaned_geolocation_data = clean_geolocation_data(
+                    geolocation, ['raw_data'])
+                set_cookie(response, cleaned_geolocation_data)
 
             return response
         except Exception:
