@@ -1,3 +1,5 @@
+[![Downloads](https://pepy.tech/badge/django-ip-geolocation)](https://pepy.tech/project/django-ip-geolocation)
+
 # Django Ip Geolocation
 Django request/response hooks to geolocate visitors by their ip address.
 
@@ -81,6 +83,7 @@ Those are the default settings, that will be overwritten by those set in `settin
 * `django_ip_geolocation.backends.IPGeolocationAPI` : (Default) Using https://ipgeolocationapi.com/
 * `django_ip_geolocation.backends.IPStack` : (Require `BACKEND_API_KEY`) Using https://ipstack.com/documentation
 * `django_ip_geolocation.backends.IP2LocationCom` : (Require `BACKEND_API_KEY`, Accepts `BACKEND_EXTRA_PARAMS`) Using https://www.ip2location.com/web-service/ip2location
+* `django_ip_geolocation.backends.IPDataCo` : (Require `BACKEND_API_KEY`) Using https://docs.ipdata.co/
 
 
 ## Implementing your own backend
