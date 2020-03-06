@@ -12,7 +12,7 @@ class IpGeolocationMiddleware(MiddlewareMixin):
 
     def __init__(self, get_response=None):  # noqa: D107
         self._geolocation_data = None
-        super(IpGeolocationMiddleware).__init__(get_response)
+        super(IpGeolocationMiddleware, self).__init__(get_response)
 
     def process_request(self, request):
         """Process the request."""
