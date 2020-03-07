@@ -2,7 +2,6 @@
 import base64
 import json
 import logging
-import inspect
 from django.utils.module_loading import import_string  # noqa: E501 # pylint: disable=import-error
 from django_ip_geolocation import settings
 
