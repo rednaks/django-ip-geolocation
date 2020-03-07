@@ -2,6 +2,7 @@
 import base64
 import json
 import logging
+import inspect
 from django.utils.module_loading import import_string  # noqa: E501 # pylint: disable=import-error
 from django_ip_geolocation import settings
 
@@ -28,8 +29,12 @@ def _get_geolocation_backend_cls():
     :return: Geolocation backend class
     :rtype: class
     """
-    backend_class_name = settings.IP_GEOLOCATION_SETTINGS.get('BACKEND')
-    geolocation_backend_cls = import_string(backend_class_name)
+    backend_path = settings.IP_GEOLOCATION_SETTINGS.get('BACKEND')
+    logging.error('Bakend : %s', backend_path)
+    if isinstance(backend_path, str):
+        geolocation_backend_cls = import_string(backend_path)
+    else:
+        geolocation_backend_cls = backend_path
     return geolocation_backend_cls
 
 
