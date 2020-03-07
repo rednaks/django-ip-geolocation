@@ -11,8 +11,8 @@ install:
 # command to run tests
 
 script:
-  - flake8 --count --statistics .
-  - bandit -r .
+  - flake8 --count --statistics django_ip_geolocation
+  - bandit -r django_ip_geolocation
   - python setup.py sdist
   - twine check dist/*
   - tox

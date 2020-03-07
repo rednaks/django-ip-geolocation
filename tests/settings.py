@@ -1,14 +1,15 @@
+"""Django settings."""
 # -*- coding: utf-8
 from __future__ import unicode_literals, absolute_import
+from tests.backend_mock import BackendMock
 
-import django
-import logging
+# import django
 
 DEBUG = True
 USE_TZ = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '!_sr1vb(h8l4+%vmizl#*9kc04&56v^!73(vo&fe&a2r_o!+h_'
+SECRET_KEY = ''
 
 DATABASES = {
     'default': {
@@ -27,9 +28,6 @@ MIDDLEWARE = [
 ]
 
 
-from tests.backend_mock import BackendMock
-
-
 IP_GEOLOCATION_SETTINGS = {
     'BACKEND': BackendMock,
     'BACKEND_API_KEY': '',
@@ -43,5 +41,3 @@ IP_GEOLOCATION_SETTINGS = {
 }
 
 SITE_ID = 1
-
-logging.error("LOADING PROJECT SETTINGS")
