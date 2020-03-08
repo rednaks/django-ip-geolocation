@@ -1,4 +1,4 @@
-[![Downloads](https://pepy.tech/badge/django-ip-geolocation)](https://pepy.tech/project/django-ip-geolocation) [![Build Status](https://travis-ci.org/rednaks/django-ip-geolocation.svg?branch=release)](https://travis-ci.org/rednaks/django-ip-geolocation)
+[![PyPI version](https://badge.fury.io/py/django-ip-geolocation.svg)](https://badge.fury.io/py/django-ip-geolocation) [![Downloads](https://pepy.tech/badge/django-ip-geolocation)](https://pepy.tech/project/django-ip-geolocation) [![Build Status](https://travis-ci.org/rednaks/django-ip-geolocation.svg?branch=release)](https://travis-ci.org/rednaks/django-ip-geolocation)
 
 # Django Ip Geolocation
 Django request/response hooks to geolocate visitors by their ip address.
