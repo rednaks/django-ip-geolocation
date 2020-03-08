@@ -61,7 +61,8 @@ def set_cookie(response, geolocation_data):
     :type: dict
     :rtype: None
     """
-    encoded_data = base64.b64encode(json.dumps(geolocation_data))
+    encoded_data = base64.b64encode(
+        json.dumps(geolocation_data).encode('utf-8'))
     response.set_cookie('geolocation', encoded_data)
 
 
