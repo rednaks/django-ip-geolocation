@@ -35,7 +35,7 @@ class IpGeolocationMiddleware(MiddlewareMixin):
             if self._geolocation_data is None:
                 self._get_geolocation(request)
 
-            if _settings.get('ENABLE_REQUEST_HOOK'):
+            if _settings.get('ENABLE_RESPONSE_HOOK'):
                 # Response hook is enabled
                 header = _settings.get('RESPONSE_HEADER')
                 response[header] = self._geolocation_data
