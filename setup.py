@@ -11,7 +11,7 @@ def readme():
 
 setup(
     name='django-ip-geolocation',
-    version='1.5.1',
+    version='1.5.2',
     author='Skander Ben Mahmoud',
     author_email='skander.bmahmoud@gmail.com',
     packages=find_packages(exclude=("tests", "docs")),
