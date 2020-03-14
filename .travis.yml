@@ -16,4 +16,5 @@ script:
   - python setup.py sdist
   - twine check dist/*
   - tox
+  - coverage report
 
