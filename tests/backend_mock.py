@@ -1,15 +1,9 @@
 """Mocked backend module."""
+from django_ip_geolocation.backends.base import GeolocationBackend
 
 
-class BackendMock(object):
+class BackendMock(GeolocationBackend):
     """BackendMock backend implementation."""
-
-    def __init__(self, ip): # noqa
-        self._ip = ip
-        self._raw_data = None
-        self._continent = None
-        self._country = None
-        self._geo_data = None
 
     def geolocate(self):
         """Mock api call."""
@@ -33,14 +27,4 @@ class BackendMock(object):
         }
         self._geo_data = self._raw_data.get('geo')
 
-    def data(self):
-        """Return mocked formatted data."""
-        self._parse()
 
-        return {
-            'ip': self._ip,
-            'continent': self._continent,
-            'country': self._country,
-            'geo': self._geo_data,
-            'raw_data': self._raw_data
-        }

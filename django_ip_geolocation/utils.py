@@ -29,11 +29,7 @@ def _get_geolocation_backend_cls():
     :rtype: class
     """
     backend_path = settings.IP_GEOLOCATION_SETTINGS.get('BACKEND')
-    logging.error('Bakend : %s', backend_path)
-    if isinstance(backend_path, str):
-        geolocation_backend_cls = import_string(backend_path)
-    else:
-        geolocation_backend_cls = backend_path
+    geolocation_backend_cls = import_string(backend_path)
     return geolocation_backend_cls
 
 

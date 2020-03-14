@@ -1,7 +1,6 @@
 """Django settings."""
 # -*- coding: utf-8
 from __future__ import unicode_literals, absolute_import
-from tests.backend_mock import BackendMock
 
 # import django
 
@@ -29,7 +28,7 @@ MIDDLEWARE = [
 
 
 IP_GEOLOCATION_SETTINGS = {
-    'BACKEND': BackendMock,
+    'BACKEND': 'tests.backend_mock.BackendMock',
     'BACKEND_API_KEY': '',
     'BACKEND_EXTRA_PARAMS': {},
     'BACKEND_USERNAME': '',
