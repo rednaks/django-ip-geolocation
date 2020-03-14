@@ -28,8 +28,8 @@ def _get_geolocation_backend_cls():
     :return: Geolocation backend class
     :rtype: class
     """
-    backend_class_name = settings.IP_GEOLOCATION_SETTINGS.get('BACKEND')
-    geolocation_backend_cls = import_string(backend_class_name)
+    backend_path = settings.IP_GEOLOCATION_SETTINGS.get('BACKEND')
+    geolocation_backend_cls = import_string(backend_path)
     return geolocation_backend_cls
 
 

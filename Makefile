@@ -15,6 +15,6 @@ upload: build check $(DIST_DIR)/*
 	@echo "Uploading dist"
 	$(PYTHON) -m twine upload $(DIST_DIR)/*
 
-clean: $(DIST_DIR)/*
+clean:
 	@echo "Cleaning everything"
-	rm -r $(DIST_DIR) django_ip_geolocation.egg-info
+	rm -r $(DIST_DIR) django_ip_geolocation.egg-info || true

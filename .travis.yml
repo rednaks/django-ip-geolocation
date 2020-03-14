@@ -7,12 +7,14 @@ python:
   - "3.8"
 # command to install dependencies
 install:
-  - pip install flake8 flake8-docstrings bandit twine
+  - pip install -r tests/requirements.txt
 # command to run tests
 
 script:
-  - flake8 --count --statistics .
-  - bandit -r .
+  - flake8 --count --statistics django_ip_geolocation
+  - bandit -r django_ip_geolocation
   - python setup.py sdist
   - twine check dist/*
+  - tox
+  - coverage report
 
