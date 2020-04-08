@@ -40,3 +40,8 @@ class GeolocationTests(TestCase):
     def test_cookie_in_response(self):
         response = self.client.get('/test_geolocation/')
         self.assertIsNotNone(response.cookies.get('geolocation'))
+
+    @change_settings(settings={'USER_CONSENT_VALIDATOR': 'tests.user_consent_mock.check_user_consent'})
+    def test_user_not_consented(self):
+        response = self.client.get('/test_geolocation/')
+        self.assertFalse(response.has_header('X-IP-Geolocation'))
