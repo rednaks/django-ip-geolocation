@@ -3,7 +3,7 @@ import logging
 
 from django.utils.deprecation import MiddlewareMixin  # noqa: E501 pylint: disable=import-error
 from django_ip_geolocation.utils import get_geolocation, set_cookie, \
-    clean_geolocation_data
+    clean_geolocation_data, is_user_consented
 from django_ip_geolocation.settings import IP_GEOLOCATION_SETTINGS as _settings  # noqa: E501
 
 
@@ -20,6 +20,9 @@ class IpGeolocationMiddleware(MiddlewareMixin):
             if not _settings.get('ENABLE_REQUEST_HOOK'):
                 return
 
+            if not is_user_consented(request):
+                return
+
             self._get_geolocation(request)
             request.geolocation = self._geolocation_data
         except Exception:
@@ -30,6 +33,9 @@ class IpGeolocationMiddleware(MiddlewareMixin):
         try:
             if not _settings.get('ENABLE_RESPONSE_HOOK') and \
                     not _settings.get('ENABLE_COOKIE'):
+                return response
+
+            if not is_user_consented(request):
                 return response
 
             if self._geolocation_data is None:

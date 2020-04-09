@@ -11,10 +11,10 @@ def readme():
 
 setup(
     name='django-ip-geolocation',
-    version='1.5.3',
+    version='1.6.0',
     author='Skander Ben Mahmoud',
     author_email='skander.bmahmoud@gmail.com',
-    packages=find_packages(exclude=("tests", "docs")),
+    packages=find_packages(exclude=("*tests*", "docs")),
     url='https://github.com/rednaks/django-ip-geolocation',
     license='MIT',
     description="Django request/response hook (Middleware and Decorator) to geolocate visitors using their IP address",  # noqa: E501

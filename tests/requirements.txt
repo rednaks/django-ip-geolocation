@@ -1,0 +1,10 @@
+coverage
+mock
+flake8
+flake8-docstrings
+bandit
+twine
+tox
+codecov
+tox-travis
+

@@ -2,7 +2,7 @@
 
 import logging
 from django_ip_geolocation.utils import get_geolocation, set_cookie, \
-    clean_geolocation_data
+    clean_geolocation_data, is_user_consented
 from django_ip_geolocation.settings import IP_GEOLOCATION_SETTINGS as _settings
 
 
@@ -19,6 +19,9 @@ def with_ip_geolocation(view_func):
             enable_request = _settings.get('ENABLE_REQUEST_HOOK')
             enable_response = _settings.get('ENABLE_RESPONSE_HOOK')
             enable_cookie = _settings.get('ENABLE_COOKIE', False)
+
+            if not is_user_consented(request):
+                return view_func(request)
 
             if not enable_request and not (enable_response or enable_cookie):
                 return view_func(request)

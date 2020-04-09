@@ -1,4 +1,4 @@
-[![Downloads](https://pepy.tech/badge/django-ip-geolocation)](https://pepy.tech/project/django-ip-geolocation) [![Build Status](https://travis-ci.org/rednaks/django-ip-geolocation.svg?branch=release)](https://travis-ci.org/rednaks/django-ip-geolocation)
+[![PyPI version](https://badge.fury.io/py/django-ip-geolocation.svg)](https://badge.fury.io/py/django-ip-geolocation) [![Downloads](https://pepy.tech/badge/django-ip-geolocation)](https://pepy.tech/project/django-ip-geolocation) [![Build Status](https://travis-ci.org/rednaks/django-ip-geolocation.svg?branch=release)](https://travis-ci.org/rednaks/django-ip-geolocation)
 
 # Django Ip Geolocation
 Django request/response hooks to geolocate visitors by their ip address.
@@ -42,8 +42,26 @@ def other_view(request):
   ...
 ```
 
-## Cookie:
+## Cookie
 Geolocation data stored in the Response cookie lacks the `raw_data` and is base64 encoded.
+
+
+## User consent
+Developers must implement a helper function to check if the user consented or not and configure it in the `settings.py`. 
+
+By default if the developer didn't provide a validation function, we consider it as implicit consent.
+
+Here is an example of the helper function:
+
+```python
+
+def check_user_consent(request):
+  if request.user.is_consented: # this is only an example.
+    return True
+  return False
+
+```
+
 
 
 ## Settings
@@ -60,6 +78,7 @@ IP_GEOLOCATION_SETTINGS = {
     'ENABLE_RESPONSE_HOOK': True,
     'ENABLE_COOKIE': False,
     'FORCE_IP_ADDR': None,
+    'USER_CONSENT_VALIDATOR': None
 }
 
 ```
@@ -78,6 +97,7 @@ Those are the default settings, that will be overwritten by those set in `settin
 | `ENABLE_RESPONSE_HOOK` | Enable or disable hook on request               | `True` (bool)                                                         |
 | `ENABLE_COOKIE`        | Enable or disable geolocation data in cookie    | `False` (bool)                                                        |
 | `FORCE_IP_ADDR`        | Force ip address, rather than using visitor ip  | `None` (string)                                                       |
+| `USER_CONSENT_VALIDATOR`| A function path to check if the current user gave his consent  | `None` (string, function path)                        |
 
 ### Available Backends
 * `django_ip_geolocation.backends.IPGeolocationAPI` : (Default) Using https://ipgeolocationapi.com/

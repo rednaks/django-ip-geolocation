@@ -28,8 +28,8 @@ def _get_geolocation_backend_cls():
     :return: Geolocation backend class
     :rtype: class
     """
-    backend_class_name = settings.IP_GEOLOCATION_SETTINGS.get('BACKEND')
-    geolocation_backend_cls = import_string(backend_class_name)
+    backend_path = settings.IP_GEOLOCATION_SETTINGS.get('BACKEND')
+    geolocation_backend_cls = import_string(backend_path)
     return geolocation_backend_cls
 
 
@@ -90,3 +90,21 @@ def clean_geolocation_data(geolocation_data, attr_to_remove=None):
             logging.info('Key not found, continuing ...')
 
     return geolocation_copy
+
+
+def is_user_consented(request):
+    """Check if the user gave consent to be geolocatted.
+
+    :param request: User http request
+    :type: HttpRequest
+    :return: Yes or no
+    :rtype: bool
+    """
+    validator_path = settings.IP_GEOLOCATION_SETTINGS.get(
+        'USER_CONSENT_VALIDATOR')
+    user_consent_validator = None
+    if validator_path is None:
+        return True
+
+    user_consent_validator = import_string(validator_path)
+    return user_consent_validator(request)
