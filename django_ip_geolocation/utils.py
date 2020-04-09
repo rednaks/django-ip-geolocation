@@ -100,7 +100,8 @@ def is_user_consented(request):
     :return: Yes or no
     :rtype: bool
     """
-    validator_path = settings.IP_GEOLOCATION_SETTINGS.get('USER_CONSENT_VALIDATOR')
+    validator_path = settings.IP_GEOLOCATION_SETTINGS.get(
+        'USER_CONSENT_VALIDATOR')
     user_consent_validator = None
     if validator_path is None:
         return True
