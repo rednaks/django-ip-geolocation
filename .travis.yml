@@ -1,15 +1,20 @@
 language: python
+
 python:
   - "3.5"
   - "3.6"      # current default Python on Travis CI
   - "3.7"
   - "3.8"
+
+# updating pip 
+before_install:
+  - pip install --upgrade pip tox virtualenv
+
 # command to install dependencies
 install:
-  - pip install -U pip
   - pip install -r tests/requirements.txt
-# command to run tests
 
+# command to run tests
 script:
   - flake8 --count --statistics django_ip_geolocation
   - bandit -r django_ip_geolocation
