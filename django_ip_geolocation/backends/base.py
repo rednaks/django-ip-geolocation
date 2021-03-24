@@ -14,7 +14,7 @@ class GeolocationBackend(object):
         self._continent = None
         self._country = None
         self._geo_data = None
-        self._raw_data = None
+        self._raw_data = {}
 
     def geolocate(self):
         """Call geoloaction api. Should be overriden."""

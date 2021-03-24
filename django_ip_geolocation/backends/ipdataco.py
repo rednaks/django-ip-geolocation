@@ -23,23 +23,12 @@ class IPDataCo(GeolocationBackend):
 
     def _parse(self):
         """Parse raw data."""
-        if self._raw_data:
-            self._continent = self._raw_data.get('continent_name')
-            self._country = {
-                'code': self._raw_data.get('country_code'),
-                'name': self._raw_data.get('country_name'),
-            }
-            self._geo_data = {
-                'latitude': self._raw_data.get('latitude'),
-                'longitude': self._raw_data.get('longitude'),
-            }
-        else:
-            self._continent = None
-            self._country = {
-                'code': None,
-                'name': None,
-            }
-            self._geo_data = {
-                'latitude': None,
-                'longitude': None,
-            }
+        self._continent = self._raw_data.get('continent_name')
+        self._country = {
+            'code': self._raw_data.get('country_code'),
+            'name': self._raw_data.get('country_name'),
+        }
+        self._geo_data = {
+            'latitude': self._raw_data.get('latitude'),
+            'longitude': self._raw_data.get('longitude'),
+        }
