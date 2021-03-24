@@ -28,7 +28,6 @@ class IPDataCo(GeolocationBackend):
             'code': self._raw_data.get('country_code'),
             'name': self._raw_data.get('country_name'),
         }
-
         self._geo_data = {
             'latitude': self._raw_data.get('latitude'),
             'longitude': self._raw_data.get('longitude'),
