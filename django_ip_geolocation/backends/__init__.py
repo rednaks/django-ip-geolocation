@@ -6,5 +6,5 @@ from django_ip_geolocation.backends.ip2locationcom import IP2LocationCom
 from django_ip_geolocation.backends.ipdataco import IPDataCo
 
 
-__all__ = ['GeolocationBackend', 'IPGeolocationAPI',
+__all__ = ['DoAPI', 'GeolocationBackend', 'IPGeolocationAPI',
            'IPStack', 'IP2LocationCom', 'IPDataCo']
